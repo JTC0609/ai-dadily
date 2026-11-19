@@ -1,1 +1,122 @@
-日報準備中
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的 AI 科技日報・2026-11-19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  /* 只要改「我的設定」的主色，整頁的重點色就跟著換 */
+  :root {
+    --accent: #b0412e;
+    --paper: #f6f3ec; --card: #ffffff; --ink: #1c1a17; --soft: #5c5850; --faint: #8f8a80;
+    --line: #e3ddd1; --tint: color-mix(in srgb, var(--accent) 9%, var(--card));
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --sans: "Noto Sans TC", -apple-system, "PingFang TC", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16150f; --card: #211f19; --ink: #f1ede4; --soft: #c2bcb0; --faint: #8b857a;
+      --line: #36322a; --tint: color-mix(in srgb, var(--accent) 18%, var(--card));
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.7; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* 刊頭 */
+  header.wrap { padding-top: 28px; }
+  .dateline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--soft); border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+  header h1 { font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 8vw, 64px); line-height: 1.15; text-align: center; margin: 18px 0 12px; letter-spacing: .04em; }
+  header h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--accent); margin: 14px auto 0; border-radius: 2px; }
+  .edition { text-align: center; color: var(--soft); font-size: 14px; margin: 0 0 18px; }
+  .edition b { color: var(--accent); }
+
+  /* 分類導覽：手機可以左右滑 */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(8px); border-top: 3px double var(--ink); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav a { flex: none; font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); white-space: nowrap; }
+  nav a b { margin-left: 6px; color: var(--accent); font-weight: 700; }
+  nav a:hover { border-color: var(--accent); }
+
+  main.wrap { padding-top: 28px; padding-bottom: 40px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--accent); font-weight: 700; margin: 0 0 6px; }
+
+  /* 今日首選 */
+  .pick { position: relative; background: var(--card); border-radius: 18px; padding: 28px 32px; margin-bottom: 36px; box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(0,0,0,.25); overflow: hidden; }
+  .pick::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--accent); }
+  .pick-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .pick h2 { margin: 0; font-size: 14px; letter-spacing: .2em; color: var(--accent); }
+  .pick-score { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--soft); }
+  .dots { display: inline-flex; gap: 4px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); }
+  .dots i.on { background: var(--accent); }
+  .pick h3 { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3.6vw, 36px); line-height: 1.4; margin: 14px 0 14px; }
+  .pick h3 a:hover { color: var(--accent); }
+  .pick-why { background: var(--tint); border-radius: 12px; padding: 14px 18px; margin: 0 0 16px; font-size: 16px; }
+  .pick-why strong { color: var(--accent); }
+  .pick-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pick-tags span { background: var(--accent); color: #fff; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 500; }
+  .pick .meta { margin: 14px 0 0; color: var(--faint); font-size: 13px; }
+
+  /* 本週熱詞 */
+  div.hot { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; margin-bottom: 40px; }
+  div.hot h2 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  div.hot > p { margin: 2px 0 14px; color: var(--faint); font-size: 13px; }
+  div.hot ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px 28px; }
+  div.hot li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  div.hot .word { font-weight: 700; }
+  div.hot .word b { display: inline-block; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 6px; background: var(--accent); color: #fff; margin-left: 4px; vertical-align: 2px; }
+  div.hot .word b.b-new { background: var(--ink); color: var(--paper); }
+  div.hot .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  div.hot .bar span { display: block; height: 100%; background: var(--faint); border-radius: 3px; }
+  div.hot li.hot .bar span, div.hot li.new .bar span { background: var(--accent); }
+  div.hot .num { font-size: 12px; color: var(--faint); }
+
+  /* 各類別 */
+  section.cat { margin-bottom: 40px; scroll-margin-top: 64px; }
+  section.cat h2 { font-family: var(--serif); font-size: 26px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  section.cat h2 small { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease; }
+  article:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(0,0,0,.35); }
+  article .src { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 6px; font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+  article .src time { color: var(--faint); font-weight: 400; }
+  article h3 { font-family: var(--serif); font-size: 19px; line-height: 1.5; margin: 0 0 10px; }
+  article h3 a:hover { color: var(--accent); }
+  .short { font-weight: 700; margin: 0 0 6px; }
+  .long { color: var(--soft); font-size: 15px; margin: 0 0 12px; }
+  .kws { margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .kw { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--paper); color: var(--soft); border: 1px solid var(--line); }
+  .kw.is-hot { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--faint); font-size: 13px; text-align: center; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .pick { padding: 22px 20px 22px 24px; border-radius: 14px; }
+    div.hot { padding: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .dateline span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="dateline"><span>2026-11-19・台北時間</span><span>資料期間 2026-11-13 至 2026-11-19 對比 2026-10-23 至 2026-11-12</span></div>
+  <h1>我的 AI 科技日報</h1>
+  <p class="edition">本期 <b>20</b> 則・由 n8n 與 Gemini 自動編輯</p>
+</header>
+<nav aria-label="新聞分類"><div class="wrap"><a href="#cat-1">AI 與軟體<b>2</b></a><a href="#cat-2">晶片與硬體<b>4</b></a><a href="#cat-4">雲端與企業 IT<b>1</b></a><a href="#cat-5">產業與市場<b>7</b></a><a href="#cat-6">政策與社會<b>3</b></a><a href="#cat-7">其他<b>3</b></a></div></nav>
+<main class="wrap">
+  <section class="pick" aria-labelledby="pick-title"><div class="pick-heading"><h2 id="pick-title">今日首選</h2><span class="pick-score"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>4 分／滿分 4 分</span></div><h3><a href="https://www.inside.com.tw/article/42961-google-gemini-4-neon" target="_blank" rel="noopener noreferrer">Google 推出 Gemini 4 Neon，效能媲美旗艦模型 Carbon、任務成本降低 32%</a></h3><p class="pick-why"><strong>為什麼值得發：</strong>點名 Google，具備具體成本數據並涉及工作分析流程。</p><div class="pick-tags"><span>在地／點名</span><span>具體</span><span>跟工作有關</span><span>熱詞</span></div><p class="meta">INSIDE・AI 與軟體</p></section>
+  <div class="hot"><p class="eyebrow">TRENDING</p><h2>本週熱詞</h2><p>本週出現次數對比前三週平均（Asia/Taipei）</p><ul><li class="hot"><span class="word">黃仁勳 <b>熱</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 92 次・平常每週 19.67 次・4.5 倍</span></li><li class="hot"><span class="word">輝達 <b>熱</b></span><span class="bar"><span style="width:90%"></span></span><span class="num">本週 90 次・平常每週 24.33 次・3.59 倍</span></li><li class="hot"><span class="word">iCloud <b>熱</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 3 次・平常每週 0.33 次・3 倍</span></li><li class="new"><span class="word">Gemini 4 Neon <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="new"><span class="word">GTA 6 <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">AI 晶片 <b>熱</b></span><span class="bar"><span style="width:63%"></span></span><span class="num">本週 14 次・平常每週 5 次・2.5 倍</span></li><li class="hot"><span class="word">日月光 <b>熱</b></span><span class="bar"><span style="width:63%"></span></span><span class="num">本週 4 次・平常每週 1 次・2.5 倍</span></li><li class="hot"><span class="word">液冷 <b>熱</b></span><span class="bar"><span style="width:60%"></span></span><span class="num">本週 3 次・平常每週 0.67 次・2.4 倍</span></li><li class="hot"><span class="word">AI 模型 <b>熱</b></span><span class="bar"><span style="width:50%"></span></span><span class="num">本週 7 次・平常每週 3 次・2 倍</span></li><li class="hot"><span class="word">科技股 <b>熱</b></span><span class="bar"><span style="width:43%"></span></span><span class="num">本週 3 次・平常每週 1.33 次・1.71 倍</span></li></ul></div>
+  <section class="cat" id="cat-1"><h2>AI 與軟體 <small>2 則</small></h2><div class="grid"><article><p class="src">INSIDE<time>11/19 13:44</time></p><h3><a href="https://www.inside.com.tw/article/42961-google-gemini-4-neon" target="_blank" rel="noopener noreferrer">Google 推出 Gemini 4 Neon，效能媲美旗艦模型 Carbon、任務成本降低 32%</a></h3><p class="short">Google 推出 Gemini 4 Neon，成本降低 32%</p><p class="long">Google 推出新模型 Gemini 4 Neon，效能媲美旗艦 Carbon 但任務成本降低 32%。該模型適合需要多步驟分析與頻繁操作工具的工作流程。Google 強調其能在長時間執行任務中維持效能。</p><p class="kws"><span class="kw">Google</span><span class="kw is-hot">Gemini 4 Neon</span><span class="kw is-hot">AI 模型</span><span class="kw">成本</span></p></article><article><p class="src">科技新報<time>11/19 12:24</time></p><h3><a href="https://technews.tw/2026/11/19/google-introduces-gemini-4-neon/" target="_blank" rel="noopener noreferrer">Gemini 4 Neon 新模型登場，兼具 Carbon 級能力與 Flash 級反應速度</a></h3><p class="short">Google 推出 Gemini 4 Neon 模型</p><p class="long">Google 於 18 日推出 Gemini 4 Neon 新模型。該模型具備 Carbon 級的能力，同時擁有 Flash 級的反應速度。這是繼上週發表兩款模型後的最新 AI 產品進展。</p><p class="kws"><span class="kw">Google</span><span class="kw is-hot">Gemini 4 Neon</span><span class="kw is-hot">AI 模型</span><span class="kw">Carbon</span></p></article></div></section><section class="cat" id="cat-2"><h2>晶片與硬體 <small>4 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 13:30</time></p><h3><a href="https://ccc.technews.tw/2026/11/19/lenovo-legion-go-beam-leaks-as-affordable-gaming-handheld-with-fresh-design/" target="_blank" rel="noopener noreferrer">聯想平價遊戲掌機 Legion Go Beam 產品圖曝光，拿掉觸控板、改 16:9 螢幕壓低成本</a></h3><p class="short">聯想 Legion Go Beam 掌機產品圖曝光</p><p class="long">聯想平價掌機 Legion Go Beam 產品圖流出，顯示其拿掉觸控板並改用 16:9 螢幕。此舉是為了壓低成本，以平價策略切入遊戲市場。外媒報導該產品外觀細節比前代更清晰。</p><p class="kws"><span class="kw">聯想</span><span class="kw">Legion Go Beam</span><span class="kw">遊戲掌機</span><span class="kw">Lenovo</span></p></article><article><p class="src">科技新報<time>11/19 13:10</time></p><h3><a href="https://finance.technews.tw/2026/11/19/auras-unveils-liquid-cooling-upgrade-roadmap/" target="_blank" rel="noopener noreferrer">AI 功耗攀升，雙鴻揭液冷升級路線</a></h3><p class="short">雙鴻揭液冷升級路線，應對 AI 晶片高功耗</p><p class="long">散熱廠雙鴻針對 AI 晶片功耗攀升，開發新材料與 Micro Channel Lid 方案。雙鴻同步展示鑽石銅方案，致力於液冷技術的升級。這將有助於解決高效能運算帶來的散熱挑戰。</p><p class="kws"><span class="kw">雙鴻</span><span class="kw is-hot">AI 晶片</span><span class="kw is-hot">液冷</span><span class="kw">散熱</span></p></article><article><p class="src">科技新報<time>11/19 13:00</time></p><h3><a href="https://finance.technews.tw/2026/11/19/ase-technology-holding-co-ltd-invested-nt248-9-billion-in-the-renwu-j-plot-in-kaohsiung/" target="_blank" rel="noopener noreferrer">日月光投控 2,489 億元投資高雄仁武 J 坵塊，擴大高階半導體測試聚落</a></h3><p class="short">日月光投資 2,489 億元於高雄擴大測試聚落</p><p class="long">日月光投控旗下福雷電子於高雄仁武園區舉行新廠動土，投資額達 2,489 億元。執行長吳田玉與高雄市長陳其邁出席，旨在擴大高階半導體測試聚落。此計畫將強化台灣在半導體後段封測的領先地位。</p><p class="kws"><span class="kw is-hot">日月光</span><span class="kw">福雷電子</span><span class="kw">高雄</span><span class="kw">半導體</span></p></article><article><p class="src">科技新報<time>11/19 12:30</time></p><h3><a href="https://finance.technews.tw/2026/11/19/hitachi-energy-expands-transformer-production-at-thailand-plant/" target="_blank" rel="noopener noreferrer">搶攻 AI 電力需求  日立能源泰國工廠增產變壓器</a></h3><p class="short">日立能源泰國工廠增產變壓器，搶攻 AI 商機</p><p class="long">日立製作所旗下子公司「日立能源」計畫在泰國工廠增加變壓器產量。此舉旨在搶攻因 AI 資料中心擴建而激增的電力設備需求。變壓器為能源部門的核心業務，正隨市場需求調整產能。</p><p class="kws"><span class="kw">日立能源</span><span class="kw">日立製作所</span><span class="kw">變壓器</span><span class="kw">AI 電力</span></p></article></div></section><section class="cat" id="cat-4"><h2>雲端與企業 IT <small>1 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/19 12:11</time></p><h3><a href="https://www.ithome.com.tw/news/180645" target="_blank" rel="noopener noreferrer">Apple多項雲端服務大規模中斷，內部軟體更新問題影響iCloud等服務逾6個小時</a></h3><p class="short">Apple 雲端服務中斷 6 小時，受內部更新影響</p><p class="long">Apple 於 11 月 17 日發生多項雲端服務大規模中斷，影響時間超過 6 小時。受影響範圍包括 iCloud 等核心服務，原因為內部軟體更新問題而非網路攻擊。目前部分服務已陸續復原，公司正設法恢復其餘系統。</p><p class="kws"><span class="kw">Apple</span><span class="kw is-hot">iCloud</span><span class="kw">雲端服務</span><span class="kw">中斷</span></p></article></div></section><section class="cat" id="cat-5"><h2>產業與市場 <small>7 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 14:00</time></p><h3><a href="https://finance.technews.tw/2026/11/19/ubs-sees-sp-500-at-8200-by-end-2027-on-earnings-strength-resilient-economy/" target="_blank" rel="noopener noreferrer">瑞銀看好美股續漲 12%  2027 年底上看 8,200 點</a></h3><p class="short">瑞銀預估美股 2027 年將達 8,200 點</p><p class="long">瑞銀全球財富管理發布展望，看好美國經濟並預估美股將續漲 12%。報告預測 S&amp;P 500 指數於 2027 年底有望上看 8,200 點。此預測反映了金融機構對美國市場長期增長的信心。</p><p class="kws"><span class="kw">瑞銀</span><span class="kw">美股</span><span class="kw">S&amp;P 500</span><span class="kw">美國經濟</span></p></article><article><p class="src">科技新報<time>11/19 13:50</time></p><h3><a href="https://finance.technews.tw/2026/11/19/target-q3-earnings-beat-expectations/" target="_blank" rel="noopener noreferrer">Target Q3 業績超預期  今年股價狂飆近 70%</a></h3><p class="short">Target 第三季業績優於預期，股價飆升 70%</p><p class="long">美國零售巨頭 Target 公布第三季財報，受惠於降價促銷與門市改裝策略奏效，營收獲利皆優於預期。今年以來股價已狂飆近 70%。該公司透過調整商品策略成功帶動業績成長。</p><p class="kws"><span class="kw">Target</span><span class="kw">財報</span><span class="kw">股價</span><span class="kw">零售</span></p></article><article><p class="src">科技新報<time>11/19 13:50</time></p><h3><a href="https://technews.tw/2026/11/19/tech-stocks-fall-out-of-favor-a-market-crash-the-likes-of-which-young-people-have-never-seen-has-arrived/" target="_blank" rel="noopener noreferrer">科技股失寵，年輕人沒見過的股市暴跌時刻來了</a></h3><p class="short">科技股熱潮帶動台股突破四萬點，年輕投資人面臨波動</p><p class="long">全球股市在 AI 熱潮帶動下創新高，台股更突破四萬點大關。這使年輕投資人傾向長期持有科技股，但也面臨市場失寵後的暴跌風險。市場提醒投資人需注意股市劇烈波動的時刻。</p><p class="kws"><span class="kw">台股</span><span class="kw is-hot">科技股</span><span class="kw">AI 熱潮</span><span class="kw">投資</span></p></article><article><p class="src">INSIDE<time>11/19 13:13</time></p><h3><a href="https://www.inside.com.tw/article/42958-nvidia-ceo-search-heidrick-arm-rene-haas" target="_blank" rel="noopener noreferrer">NVIDIA 委任獵頭找黃仁勳接班人，傳已接觸 Arm 執行長 Rene Haas</a></h3><p class="short">NVIDIA 尋找黃仁勳接班人，傳已接觸 Arm 執行長</p><p class="long">NVIDIA 委託獵頭公司尋找執行長黃仁勳的接班人，據傳已接觸 Arm 執行長 Rene Haas。這是公司成立 33 年來首次對外尋才。目前曝光人選包含曾於 2013 年離職的老部屬。</p><p class="kws"><span class="kw">NVIDIA</span><span class="kw is-hot">黃仁勳</span><span class="kw">Rene Haas</span><span class="kw">Arm</span></p></article><article><p class="src">科技新報<time>11/19 13:00</time></p><h3><a href="https://finance.technews.tw/2026/11/19/softbanks-son-calls-missing-anthropic-investment-one-of-his-mistakes/" target="_blank" rel="noopener noreferrer">孫正義坦言錯過投資 Anthropic 是失誤：已押注 OpenAI，不能同時押兩匹馬</a></h3><p class="short">孫正義坦言錯過投資 Anthropic 是重大失誤</p><p class="long">軟銀創辦人孫正義坦承放棄投資 Anthropic 是其失誤之一。他表示當時已押注 OpenAI，因無法同時投資兩家競爭對手而錯失機會。他在東京論壇上分享了對 AI 投資策略的反思。</p><p class="kws"><span class="kw">孫正義</span><span class="kw">軟銀</span><span class="kw">Anthropic</span><span class="kw">OpenAI</span></p></article><article><p class="src">科技新報<time>11/19 12:40</time></p><h3><a href="https://finance.technews.tw/2026/11/19/morgan-stanley-cuts-tencent-price-target/" target="_blank" rel="noopener noreferrer">AI 投資壓抑短期獲利，大摩降騰訊目標價</a></h3><p class="short">大摩調降騰訊目標價，受 AI 投資壓抑獲利影響</p><p class="long">摩根士丹利發布報告，指稱更高的人工智慧投資將對騰訊短期獲利造成壓力。因此大摩決定調降騰訊的目標價。此舉反映了市場對科技巨頭 AI 資本支出的關注。</p><p class="kws"><span class="kw">大摩</span><span class="kw">騰訊</span><span class="kw">AI 投資</span><span class="kw">目標價</span></p></article><article><p class="src">科技新報<time>11/19 12:20</time></p><h3><a href="https://finance.technews.tw/2026/11/19/jensen-huang-sudden-resignation-sparks-controversy-microsoft-customers-seek-nvidia-alternatives/" target="_blank" rel="noopener noreferrer">黃仁勳閃辭掀風暴  微軟：客戶更想找輝達替代品</a></h3><p class="short">黃仁勳辭職引發輝達動盪，微軟客戶尋求替代品</p><p class="long">輝達執行長黃仁勳閃電辭職引發公司治理動盪，股價受衝擊。微軟表示，部分客戶已開始尋找輝達 AI 晶片的替代產品。此事件對 AI 供應鏈的穩定性造成不確定性。</p><p class="kws"><span class="kw is-hot">黃仁勳</span><span class="kw is-hot">輝達</span><span class="kw">微軟</span><span class="kw">Nvidia</span></p></article></div></section><section class="cat" id="cat-6"><h2>政策與社會 <small>3 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 13:40</time></p><h3><a href="https://technews.tw/2026/11/19/google-new-foldable-app-guidelines/" target="_blank" rel="noopener noreferrer">Google 祭出摺疊機 App 強制令，2027 年起未達標將遭 Play 商店拒絕上架</a></h3><p class="short">Google 規定 2027 年起摺疊機 App 需達標方可上架</p><p class="long">Google 針對 Play 商店摺疊裝置訂出三級品質要求，將 Tier 3 定為最低強制門檻。自 2027 年起，未達標的 App 將遭拒絕上架。此舉旨在提升摺疊裝置的軟體使用體驗。</p><p class="kws"><span class="kw">Google</span><span class="kw">Play 商店</span><span class="kw">摺疊機</span><span class="kw">App</span></p></article><article><p class="src">科技新報<time>11/19 12:50</time></p><h3><a href="https://technews.tw/2026/11/19/impact-ai-era-chinas-economy/" target="_blank" rel="noopener noreferrer">AI 狂潮與產能過剩雙重夾擊，中國就業市場迎「凜冬」與轉型陣痛</a></h3><p class="short">AI 衝擊中國就業市場，面臨轉型陣痛</p><p class="long">彭博分析指出，AI 的快速發展正加劇中國原已疲弱的就業市場壓力。就業市場正面臨「凜冬」與嚴峻的轉型挑戰。職位需求改變使得求職者面臨更大的競爭與轉職困難。</p><p class="kws"><span class="kw">AI</span><span class="kw">中國</span><span class="kw">就業市場</span><span class="kw">彭博</span></p></article><article><p class="src">科技新報<time>11/19 12:42</time></p><h3><a href="https://technews.tw/2026/11/19/us-energy-reform-bill-fast-tracked-before-congressional-reorganization/" target="_blank" rel="noopener noreferrer">美國能源改革法案加速闖關，力拚參眾兩院改組前完成立法</a></h3><p class="short">美國能源改革法案力拚通過，應對 AI 電力需求</p><p class="long">美國參議院正加速推動能源改革法案，力拚在兩院改組前完成立法。此舉是為了因應 AI 資料中心快速擴建導致的電力需求攀升。法案關注焦點包括電網建設速度與能源成本控制。</p><p class="kws"><span class="kw">能源改革法案</span><span class="kw">AI 資料中心</span><span class="kw">電力需求</span><span class="kw">參議院</span></p></article></div></section><section class="cat" id="cat-7"><h2>其他 <small>3 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 14:00</time></p><h3><a href="https://technews.tw/2026/11/19/blood-test-results-cellular-imaging-ozelle-o-cyte-1-analyzer-medica-2026/" target="_blank" rel="noopener noreferrer">從血液常規檢查結果到細胞影像：Ozelle 在 MEDICA 2026 上展示 O-Cyte 1 分析儀</a></h3><p class="short">Ozelle 於 MEDICA 展示 O-Cyte 1 分析儀</p><p class="long">Ozelle 在 MEDICA 2026 展示 O-Cyte 1 分析儀，輔助全血細胞計數異常時的複檢。該設備透過提供細胞影像，為後續檢查提供重要參考。其應用於血液常規檢查，能優化醫療診斷流程。</p><p class="kws"><span class="kw">Ozelle</span><span class="kw">O-Cyte 1</span><span class="kw">MEDICA</span><span class="kw">全血細胞計數</span></p></article><article><p class="src">科技新報<time>11/19 13:20</time></p><h3><a href="https://ccc.technews.tw/2026/11/19/gta-6-release/" target="_blank" rel="noopener noreferrer">〈GTA 6〉獲 99 分神級評價成史上最佳，完美鉅作唯一遺憾：全主機鎖定 30 幀</a></h3><p class="short">GTA 6 獲 99 分神級評價，主機將鎖定 30 幀</p><p class="long">Rockstar Games 新作《俠盜獵車手 6》獲得 99 分評價，被譽為史上最佳鉅作。然而該作在全主機平台將鎖定 30 幀率，成為唯一遺憾。這款萬眾矚目的遊戲再次引發市場熱議。</p><p class="kws"><span class="kw is-hot">GTA 6</span><span class="kw">Rockstar Games</span><span class="kw">俠盜獵車手 6</span><span class="kw">幀率</span></p></article><article><p class="src">科技新報<time>11/19 12:26</time></p><h3><a href="https://technews.tw/2026/11/19/helicopter-mars-skyfall/" target="_blank" rel="noopener noreferrer">從謹慎飛行到挑戰音障，NASA 下一代火星直升機性能大躍進</a></h3><p class="short">NASA 測試火星直升機超音速旋翼技術</p><p class="long">NASA 持續推進下一代火星無人直升機的性能極限，目標使旋翼葉尖達超音速。這項測試旨在大幅提升升力，解決火星稀薄大氣的飛行難題。研究成果將直接影響未來火星探索任務的設計。</p><p class="kws"><span class="kw">NASA</span><span class="kw">火星直升機</span><span class="kw">超音速</span><span class="kw">無人機</span></p></article></div></section>
+</main>
+<footer><div class="wrap">這份日報每天早上由我自己做的 n8n 流程自動產生</div></footer>
+</body>
+</html>
